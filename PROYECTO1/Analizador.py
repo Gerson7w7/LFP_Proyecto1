@@ -95,7 +95,9 @@ def analizar(contenido):
                     print(str(e))
             else:
                 buffer += c
-                errores.append(Error("Caracter: '" + buffer + "' no reconocido.","Error léxico", linea, columna))                
+                columna += 1
+                errores.append(Error("Caracter: '" + buffer + "' no reconocido.","Error léxico", linea, columna))  
+                buffer = ""              
 
         # estado 1
         elif estado == 1:
@@ -151,6 +153,8 @@ def analizar(contenido):
                     tokens.append(Token(buffer, "Filtro" , linea, columna))
                 elif buffer == "MIRRORX" or buffer == "MIRRORY" or buffer == "DOUBLEMIRROR":
                     tokens.append(Token(buffer, "Parámetro" , linea, columna))
+                else:
+                    errores.append(Error("Caracter: '" + buffer + "' no reconocido.","Error léxico", linea, columna))
                 buffer = ""
                 i -= 1
                 estado = 0
@@ -174,6 +178,7 @@ def analizar(contenido):
                 estado = 6
                 columna += 1
             else: 
+                columna += 1
                 errores.append(Error("Caracter: '" + buffer + "' no reconocido.","Error léxico", linea, columna))
                 estado = 0
                 buffer = ""

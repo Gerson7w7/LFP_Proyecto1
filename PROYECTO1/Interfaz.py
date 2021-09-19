@@ -12,6 +12,7 @@ class GUI(QMainWindow):
         self.contenido = None
         self.errorDialog = ErrorDialog()
         self.mensajeExito = MensajeExito()
+        self.filtroError = FiltroError()
         uic.loadUi("GUI/interfaz.ui", self)
         self.label_2.setHidden(True)
         self.label_3.setHidden(True)
@@ -59,6 +60,12 @@ class GUI(QMainWindow):
     def original(self):
         nombreImagen = self.cBoxImg.currentText()
         print(nombreImagen)
+        imagen = None
+        for i in img:
+            if nombreImagen == i.titulo:
+                imagen = i
+
+        self.dimensiones.setText(f"Dimensión: {imagen.ancho}x{imagen.alto}")
         pixmap = QPixmap("Imagenes/Original/Jpg/" + nombreImagen + ".png")
         imagen = pixmap.scaled(QSize(681,381), Qt.IgnoreAspectRatio) # Qt.KeepAspectRatio 
         self.label.setPixmap(imagen)
@@ -66,29 +73,61 @@ class GUI(QMainWindow):
     def mirrorx(self):
         nombreImagen = self.cBoxImg.currentText()
         print(nombreImagen)
-        pixmap = QPixmap("Imagenes/MirrorX/Jpg/" + nombreImagen + ".png")
-        imagen = pixmap.scaled(QSize(681,381), Qt.IgnoreAspectRatio) # Qt.KeepAspectRatio 
-        self.label.setPixmap(imagen)
+        imagen = None
+        for i in img:
+            if nombreImagen == i.titulo:
+                imagen = i
+
+        if "MIRRORX" in imagen.filtros:
+            pixmap = QPixmap("Imagenes/MirrorX/Jpg/" + nombreImagen + ".png")
+            imagen = pixmap.scaled(QSize(681,381), Qt.IgnoreAspectRatio) # Qt.KeepAspectRatio 
+            self.label.setPixmap(imagen)
+        else:
+            self.filtroError.show()
 
     def mirrory(self):
         nombreImagen = self.cBoxImg.currentText()
         print(nombreImagen)
-        pixmap = QPixmap("Imagenes/MirrorY/Jpg/" + nombreImagen + ".png")
-        imagen = pixmap.scaled(QSize(681,381), Qt.IgnoreAspectRatio) # Qt.KeepAspectRatio 
-        self.label.setPixmap(imagen)
+        imagen = None
+        for i in img:
+            if nombreImagen == i.titulo:
+                imagen = i
+
+        if "MIRRORY" in imagen.filtros:        
+            pixmap = QPixmap("Imagenes/MirrorY/Jpg/" + nombreImagen + ".png")
+            imagen = pixmap.scaled(QSize(681,381), Qt.IgnoreAspectRatio) # Qt.KeepAspectRatio 
+            self.label.setPixmap(imagen)
+        else:
+            self.filtroError.show()
     
     def doublemirror(self):
         nombreImagen = self.cBoxImg.currentText()
         print(nombreImagen)
-        pixmap = QPixmap("Imagenes/DoubleMirror/Jpg/" + nombreImagen + ".png")
-        imagen = pixmap.scaled(QSize(681,381), Qt.IgnoreAspectRatio) # Qt.KeepAspectRatio 
-        self.label.setPixmap(imagen)
+        imagen = None
+        for i in img:
+            if nombreImagen == i.titulo:
+                imagen = i
+        
+        if "DOUBLEMIRROR" in imagen.filtros:
+            pixmap = QPixmap("Imagenes/DoubleMirror/Jpg/" + nombreImagen + ".png")
+            imagen = pixmap.scaled(QSize(681,381), Qt.IgnoreAspectRatio) # Qt.KeepAspectRatio 
+            self.label.setPixmap(imagen)
+        else:
+            self.filtroError.show()
       
 
 class ErrorDialog(QDialog):
     def __init__(self):
         super().__init__()
         uic.loadUi("GUI/errorDialog.ui", self)
+        # botones clickeados y por parámetro las funciones que desencadenan
+        self.botonAceptar.clicked.connect(self.close)
+    
+
+class FiltroError(QDialog):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi("GUI/filtroError.ui", self)
         # botones clickeados y por parámetro las funciones que desencadenan
         self.botonAceptar.clicked.connect(self.close)
 

@@ -562,6 +562,22 @@ alternate-background-color: rgb(0, 255, 255);</string>
     <string> las imagenes!</string>
    </property>
   </widget>
+  <widget class="QLabel" name="dimensiones">
+   <property name="geometry">
+    <rect>
+     <x>420</x>
+     <y>420</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>botonOriginal</zorder>
   <zorder>botonMX</zorder>
   <zorder>botonMY</zorder>
@@ -575,6 +591,7 @@ alternate-background-color: rgb(0, 255, 255);</string>
   <zorder>label</zorder>
   <zorder>label_2</zorder>
   <zorder>label_3</zorder>
+  <zorder>dimensiones</zorder>
  </widget>
  <resources/>
  <connections/>

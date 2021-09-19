@@ -3,6 +3,7 @@ TITULO="Hongo";
         ALTO=320;
         FILAS=16;
         COLUMNAS=16;
+		ADFADDFS
         CELDAS = {
 			[5,0,TRUE,#000000],
 			[6,0,TRUE,#000000],
@@ -131,3 +132,4 @@ TITULO="Hongo";
 			[10,5,TRUE,#00FF00]
 		};
         FILTROS = MIRRORX;
+ADFADDFS
